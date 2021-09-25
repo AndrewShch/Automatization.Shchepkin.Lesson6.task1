@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class TransferMoneyTest {
-    LoginPage loginPage = new LoginPage();
+    LoginPage loginPage;
 
     @BeforeEach
     void setUp() {
-        open("http://localhost:9999/");
+       loginPage = open("http://localhost:9999/", LoginPage.class);
     }
 
     @Test
@@ -54,8 +54,6 @@ public class TransferMoneyTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verifyInfo = DataHelper.getVerificationCodeFor(authInfo);
         var dashBoardPage = verificationPage.validVerify(verifyInfo);
-        int firstBalance = dashBoardPage.getFirstCardBalance();
-        int secondBalance = dashBoardPage.getSecondCardBalance();
         var transferMoney = dashBoardPage.secondCardButton();
         String sum = "50000";
         var card = DataHelper.getFirstCard();
